@@ -8,7 +8,6 @@ It can compress css file also can combine several css files.
 ### Requirement
 
 * PHP 5.3+
-* PHP-CLI (optional)
 
 ### How To Use
 

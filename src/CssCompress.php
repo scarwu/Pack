@@ -6,18 +6,23 @@
  * @author		ScarWu
  * @copyright	Copyright (c) 2012, ScarWu (http://scar.simcz.tw/)
  * @link		http://github.com/scarwu/CssCompress
- * @since		Version 1.0
- * @filesource
  */
  
 class CssCompress {
-	private static $_list = array();
+	/**
+	 * @var string or array
+	 */
+	private static $_list;
+	
+	/**
+	 * @var string
+	 */
 	private static $_dest;
 	
 	public function __construct() {}
 
 	/**
-	 * 
+	 * Init Compress
 	 */
 	public static function Init($list, $dest) {
 		if(!is_array($list)) {
@@ -51,6 +56,10 @@ class CssCompress {
 	
 	/**
 	 * Compress
+	 * 
+	 * @param string
+	 * 
+	 * @return string
 	 */
 	private static function Compress($css) {
 		$css = preg_replace('/(\f|\n|\r|\t|\v)/', '', $css);
