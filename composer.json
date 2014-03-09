@@ -1,0 +1,21 @@
+{
+    "name": "scarwu/pack",
+    "homepage": "https://github.com/scarwu/Pack",
+    "description": "Pack and Minify CSS File",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Scar Wu",
+            "email": "xneriscool@gmail.com",
+            "homepage": "http://scar.simcz.tw"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Pack": "src"
+        }
+    }
+}
