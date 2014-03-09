@@ -1,6 +1,6 @@
 <?php
 /**
- * CSS Pack and Minify
+ * JavaScript pack and Minify
  *
  * @package     Pack
  * @author      ScarWu
@@ -10,7 +10,7 @@
 
 namespace Pack;
 
-class CSS
+class JS
 {
     /**
      * @var array
@@ -50,7 +50,7 @@ class CSS
     }
 
     /**
-     * Clean CSS List
+     * Clean JavaScript List
      */
     public function clean()
     {
@@ -58,7 +58,7 @@ class CSS
     }
 
     /**
-     * Pack CSS
+     * Pack JavaScript
      *
      * @param string
      */
@@ -78,35 +78,10 @@ class CSS
                 continue;
             }
 
-            $css = file_get_contents($src);
-            $css = $this->replace($css);
+            $js = file_get_contents($src);
 
-            fwrite($handle, $css);
+            fwrite($handle, $js);
         }
         fclose($handle);
-    }
-
-    /**
-     * Replace Character
-     *
-     * @param string
-     * @return string
-     */
-    private function replace($css)
-    {
-        $css = preg_replace('/(\f|\n|\r|\t|\v)/', '', $css);
-        $css = preg_replace('/\/\*.+?\*\//', '', $css);
-        $css = preg_replace('/[ ]+/', ' ', $css);
-        $css = str_replace([
-            ' ,', ', ', ': ', ' :',
-            ' {', '{ ', ' }', '} ',
-            ' ;', '; '
-        ], [
-            ',', ',', ':', ':',
-            '{', '{', '}', '}',
-            ';', ';'
-        ], $css);
-
-        return $css;
     }
 }
