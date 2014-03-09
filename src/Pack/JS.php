@@ -1,6 +1,6 @@
 <?php
 /**
- * JavaScript pack and Minify
+ * JavaScript Pack
  *
  * @package     Pack
  * @author      ScarWu

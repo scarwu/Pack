@@ -1,6 +1,6 @@
 <?php
 /**
- * CSS Compress Example
+ * CSS Pack Example
  * 
  * @package     Pack
  * @author      ScarWu
@@ -22,7 +22,7 @@ $css = new Pack\CSS([
     "$root/css/html5-boilerplate.css"
 ], "$root/tmp/output_css_a.css");
 
-// Pack and Minify CSS Files to output_css_a.css
+// Pack CSS Files to output_css_a.css
 $css->pack();
 
 // Clean CSS Source List
@@ -31,5 +31,5 @@ $css->clean();
 // Add CSS File to List
 $css->add("$root/css/normalize.css");
 
-// Pack and Minify CSS File to output_css_b.css
+// Pack CSS File to output_css_b.css
 $css->pack("$root/tmp/output_css_b.css");

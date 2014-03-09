@@ -1,6 +1,6 @@
 <?php
 /**
- * CSS Pack and Minify
+ * CSS Pack
  *
  * @package     Pack
  * @author      ScarWu
@@ -94,18 +94,24 @@ class CSS
      */
     private function replace($css)
     {
-        $css = preg_replace('/(\f|\n|\r|\t|\v)/', '', $css);
+        // @todo: content: " (" fun() ") ";
+        
+        $css = preg_replace('/[\r\t\n\f]/', '', $css);
         $css = preg_replace('/\/\*.+?\*\//', '', $css);
         $css = preg_replace('/[ ]+/', ' ', $css);
-        $css = str_replace([
-            ' ,', ', ', ': ', ' :',
-            ' {', '{ ', ' }', '} ',
-            ' ;', '; '
-        ], [
-            ',', ',', ':', ':',
-            '{', '{', '}', '}',
-            ';', ';'
-        ], $css);
+
+        $char = [
+            ',' => [' ,', ', ', ' , '],
+            '{' => [' {', '{ ', ' { '],
+            '}' => [' }', '} ', ' } '],
+            ':' => [' :', ': ', ' : '],
+            ';' => [' ;', '; ', ' ; '],
+            '!' => [' !', '! ', ' ! ']
+        ];
+
+        foreach ($char as $replace => $search) {
+            $css = str_replace($search, $replace, $css);
+        }
 
         return $css;
     }
