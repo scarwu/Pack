@@ -17,10 +17,13 @@ if (!file_exists("$root/tmp")) {
 require "$root/../src/Pack/JS.php";
 
 // Initialize JavaScript Packer
-$js = new Pack\JS([
+$js = new Pack\JS();
+
+// Append JavaScript List
+$js->append([
     "$root/js/example.js",
     "$root/js/custom.js"
-], "$root/tmp/output_js_a.js");
+]);
 
-// Pack JavaScript Files to output_js_a.js
-$js->pack();
+// Pack JavaScript Files
+$js->save("$root/tmp/output.js");

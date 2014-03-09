@@ -1,6 +1,6 @@
 # Pack
 
-Pack and Minify CSS File
+Pack CSS, JavaScript and HTML File
 
 ## Getting Started
 

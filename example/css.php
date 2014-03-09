@@ -17,19 +17,16 @@ if (!file_exists("$root/tmp")) {
 require "$root/../src/Pack/CSS.php";
 
 // Initialize CSS Packer
-$css = new Pack\CSS([
+$css = new Pack\CSS();
+
+// Append CSS List
+$css->append([
     "$root/css/jquery-ui-1.8.19.custom.css",
     "$root/css/html5-boilerplate.css"
-], "$root/tmp/output_css_a.css");
+]);
 
-// Pack CSS Files to output_css_a.css
-$css->pack();
+// Append CSS Path to List
+$css->append("$root/css/normalize.css");
 
-// Clean CSS Source List
-$css->clean();
-
-// Add CSS File to List
-$css->add("$root/css/normalize.css");
-
-// Pack CSS File to output_css_b.css
-$css->pack("$root/tmp/output_css_b.css");
+// Pack CSS File
+$css->save("$root/tmp/output.css");

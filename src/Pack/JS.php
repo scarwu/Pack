@@ -18,70 +18,76 @@ class JS
     private $_list;
 
     /**
-     * @var string
-     */
-    private $_dest;
-
-    /**
      * @param array
      * @param string
      */
-    public function __construct($list = [], $dest = null)
+    public function __construct()
     {
-        if (is_array($list)) {
-            $this->_list = $list;
-        }
-
-        if (is_string($dest)) {
-            $this->_dest = $dest;
-        }
+        $this->_list = [];
     }
 
     /**
-     * Add Path to List
+     * Append Path or List to List
+     *
+     * @param string
+     * @return object
+     */
+    public function append($list = null)
+    {
+        if (is_string($list)) {
+            $this->_list[] = $list;
+        }
+
+        if (is_array($list)) {
+            $this->_list = array_merge($this->_list, $list);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Packed JavaScript
+     *
+     * @return string
+     */
+    public function get($js = '')
+    {
+        if ('' === $js) {
+            foreach ((array) $this->_list as $src) {
+                if (!file_exists($src)) {
+                    continue;
+                }
+
+                $js .= file_get_contents($src);
+            }
+        }
+
+        $this->_list = [];
+
+        return $this->pack($js);
+    }
+
+    /**
+     * Save JavaScript to File
      *
      * @param string
      */
-    public function add($src = null)
-    {
-        if (is_string($src)) {
-            $this->_list[] = $src;
+    public function save($dest = null) {
+        if (!file_exists(dirname($dest))) {
+            mkdir(dirname($dest), 0755, true);
         }
-    }
 
-    /**
-     * Clean JavaScript List
-     */
-    public function clean()
-    {
-        $this->_list = [];
+        file_put_contents($dest, $this->get());
     }
 
     /**
      * Pack JavaScript
      *
      * @param string
+     * @return string
      */
-    public function pack($dest = null)
+    private function pack($js)
     {
-        if (is_string($dest)) {
-            $this->_dest = $dest;
-        }
-
-        if (!file_exists(dirname($this->_dest))) {
-            mkdir(dirname($this->_dest), 0755, true);
-        }
-
-        $handle = fopen($this->_dest, 'w+');
-        foreach ((array) $this->_list as $src) {
-            if (!file_exists($src)) {
-                continue;
-            }
-
-            $js = file_get_contents($src);
-
-            fwrite($handle, $js);
-        }
-        fclose($handle);
+        return $js;
     }
 }

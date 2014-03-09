@@ -1,7 +1,7 @@
 {
     "name": "scarwu/pack",
     "homepage": "https://github.com/scarwu/Pack",
-    "description": "Pack and Minify CSS File",
+    "description": "Pack CSS, JavaScript and HTML File",
     "require": {
         "php": ">=5.4.0"
     },

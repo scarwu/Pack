@@ -10,16 +10,19 @@
 
 namespace Pack;
 
+use Pack\JS;
+use Pack\CSS;
+
 class HTML
 {
     /**
      * @var string
      */
-    private $_html;
+    private $_path;
 
     public function __construct()
     {
-        $this->_html = null;
+        $this->_path = null;
     }
 
     /**
@@ -27,52 +30,49 @@ class HTML
      *
      * @param string
      */
-    public function setHTML($html = null)
+    public function set($path = null)
     {
-        $this->_html = $html;
-    }
-
-    /**
-     * Clean
-     */
-    public function clean()
-    {
-        $this->_html = null;
+        $this->_path = $path;
     }
 
     /**
      * @param string
      * @param string
      */
-    public function pack($src = null, $dest = null)
+    public function get($html = '')
     {
-        if (file_exists($src)) {
-            $this->_html = file_get_contents($src);
+        if ('' === $html) {
+            if (file_exists($this->_path)) {
+                $html = file_get_contents($this->_path);
+            }
         }
 
-        if (null !== $this->_html) {
-            $this->replace();
-        }
+        $this->_path = null;
 
-        if (null === $dest) {
-            return $this->_html;
-        }
+        return $this->pack($html);
+    }
 
+    /**
+     * Save HTML to File
+     *
+     * @param string
+     */
+    public function save($dest = null) {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);
         }
 
-        file_put_contents($dest, $this->_html);
+        file_put_contents($dest, $this->get());
     }
 
     /**
-     * Replace HTML
+     * Pack HTML
      */
-    private function replace() {
+    private function pack($html) {
         $in_tag = false;
         $in_quotation_mark = false;
 
-        $chars = str_split($this->_html);
+        $chars = str_split($html);
         $result = '';
 
         foreach ($chars as $index => $char) {
@@ -154,6 +154,6 @@ class HTML
             }
         }
 
-        $this->_html = $result;
+        return $result;
     }
 }

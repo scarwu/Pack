@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="記錄學習過程、生活以及一些想說的話。">
-    <meta name="keywords" content="ScarShow,刀疤說,ScarWu,刀疤">
+    <meta name="keywords" content="ScarShow,刀疤說,ScarWu,刀疤,Ubuntu,Linux,ZSH,oh-my-zsh">
 
     <meta name="og:url" content="http://scar.simcz.tw/">
-    <meta name="og:title" content="ScarShow | 刀疤說">
+    <meta name="og:title" content="ZSH - history-search-backward/forward | ScarShow | 刀疤說">
     <meta name="og:description" content="記錄學習過程、生活以及一些想說的話。">
     <meta name="og:image" content="http://scar.simcz.tw/images/icon.jpg">
     <meta name="og:type" content="blog">
 
-    <title>ScarShow | 刀疤說</title>
+    <title>ZSH - history-search-backward/forward | ScarShow | 刀疤說</title>
     
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
     <link rel="stylesheet" href="/theme/main.css">
@@ -47,176 +47,9 @@
         </span>
     </nav>
     <div id="main">
-        <div id="container"><div id="page">
-        <article>
-        <h1 class="title"><a href="/article/2014/02/23/ubuntu-bundled-pcre-and-php-segmentation-fault">Ubuntu內建PCRE Library所造成的PHP Segmentation Fault</a></h1>
-        <div class="info">
-            <div class="date">
-                <span class="icon icon-calendar"></span>
-                <a href="/archive/2014">2014-02-23</a>          </div>
-            <div class="category">
-                <span class="icon icon-folder-close"></span>
-                <a href="/category/IT">IT</a>           </div>
-            <div class="tag">
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Linux">Linux</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Note">Note</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/PHP">PHP</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/PHPBrew">PHPBrew</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Ubuntu">Ubuntu</a></span>
-                <br />
-                            </div>
-            <div class="comments">
-                <span class="icon icon-comment"></span>
-                <a href="/article/2014/02/23/ubuntu-bundled-pcre-and-php-segmentation-fault/#disqus_thread">0 Comment</a>
-            </div>
-            <hr>
-            <div class="social_tool">
-                <div class="g-plusone" data-href="http://scar.simcz.tw/article/2014/02/23/ubuntu-bundled-pcre-and-php-segmentation-fault/" data-size="medium"></div>
-                <div class="fb-like" href="http://scar.simcz.tw/article/2014/02/23/ubuntu-bundled-pcre-and-php-segmentation-fault/" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-            </div>
-        </div>
-        <div class="content"><h2>接續</h2>
-
-<p>我前天說到我要找時間查查到底是什麼原因造成<code>PHP</code>的<code>Segmentation Fault</code>，我想本篇文章的標題已經指名原因了，<del>那我就結束這回合<del>。</p>
-
-<p>當然我還是在這邊紀錄一下流程以及解決方法，然後在除錯的過程中還順便解了一個<code>PHPBrew</code>的<code>Bug</code>，這個<code>Bug</code>就是關於<code>./configure</code>找不到<code>libpcre(.a|.so)</code>的問題，原因是出在於系統架構的判斷。</p>
-
-<p>先不管這個，我之前說過只要<code>preg_match()</code>只要輸入的字串一長就會發生錯誤，所以我們朝<code>PCRE Library</code>進行。</p>
-
-</div>
-        <a class="more" href="/article/2014/02/23/ubuntu-bundled-pcre-and-php-segmentation-fault">More</a>
-    </article>
-        <article>
-        <h1 class="title"><a href="/article/2014/02/21/pointless-with-segmentation-faults">Pointless所遭遇到的Segmentation Faults</a></h1>
-        <div class="info">
-            <div class="date">
-                <span class="icon icon-calendar"></span>
-                <a href="/archive/2014">2014-02-21</a>          </div>
-            <div class="category">
-                <span class="icon icon-folder-close"></span>
-                <a href="/category/IT">IT</a>           </div>
-            <div class="tag">
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/PHP">PHP</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Pointless">Pointless</a></span>
-                <br />
-                            </div>
-            <div class="comments">
-                <span class="icon icon-comment"></span>
-                <a href="/article/2014/02/21/pointless-with-segmentation-faults/#disqus_thread">0 Comment</a>
-            </div>
-            <hr>
-            <div class="social_tool">
-                <div class="g-plusone" data-href="http://scar.simcz.tw/article/2014/02/21/pointless-with-segmentation-faults/" data-size="medium"></div>
-                <div class="fb-like" href="http://scar.simcz.tw/article/2014/02/21/pointless-with-segmentation-faults/" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-            </div>
-        </div>
-        <div class="content"><h2>怪事</h2>
-
-<p>在開發<code>Pointless</code>到現在的兩年期間內，初期其實都還算順利，直到最近幾個月遇到了兩次<code>Segmentation Fault</code>，終於我遇的不是<code>PHP</code>的<code>Syntax Error</code>，而是<code>PHP</code>的<code>Bugs</code>或是其中函式庫的問題。</p>
-
-<p>寫直譯式語言可以遇到語言的錯誤還滿猛的，一次是在<code>OS X</code>上用<code>PHPBrew</code>編出的<code>PHP</code>，另一次就是最近在<code>Ubuntu 13.10</code>及<code>Ubuntu 12.04 LTS</code>上還是用<code>PHPBrew</code>所編出的<code>PHP</code>。</p>
-
-<p>題外話，話說<code>PHPBrew</code>超好用的，可以在不同版本的下作切換，對於開發來說實在是很棒。</p>
-
-</div>
-        <a class="more" href="/article/2014/02/21/pointless-with-segmentation-faults">More</a>
-    </article>
-        <article>
-        <h1 class="title"><a href="/article/2014/01/19/chrome-enable-hardware-graphics">Chrome - Enable Hardware Graphics</a></h1>
-        <div class="info">
-            <div class="date">
-                <span class="icon icon-calendar"></span>
-                <a href="/archive/2014">2014-01-19</a>          </div>
-            <div class="category">
-                <span class="icon icon-folder-close"></span>
-                <a href="/category/IT">IT</a>           </div>
-            <div class="tag">
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Chrome">Chrome</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Linux">Linux</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/WebGL">WebGL</a></span>
-                <br />
-                            </div>
-            <div class="comments">
-                <span class="icon icon-comment"></span>
-                <a href="/article/2014/01/19/chrome-enable-hardware-graphics/#disqus_thread">0 Comment</a>
-            </div>
-            <hr>
-            <div class="social_tool">
-                <div class="g-plusone" data-href="http://scar.simcz.tw/article/2014/01/19/chrome-enable-hardware-graphics/" data-size="medium"></div>
-                <div class="fb-like" href="http://scar.simcz.tw/article/2014/01/19/chrome-enable-hardware-graphics/" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-            </div>
-        </div>
-        <div class="content"><h2>難得</h2>
-
-<p>很難得可以在一天內發兩篇文章，在上一篇文末提到<code>WebGL</code>打不開的問題，那是個誤會，真的。</p>
-
-<p>在<code>Chrome</code>的<code>chrome://flags</code>裡有一個選項<code>Override software rendering list</code>可以開啟硬體加速，在更新驅動程式前我怎樣試都不行，所以我就以為沒有用。</p>
-
-<p>其實在驅動程式更新之後就已經可以使用了，只是硬體加速還要另外開啟，讓我產生<code>WebGL</code>無法開啟的錯覺。</p>
-
-</div>
-        <a class="more" href="/article/2014/01/19/chrome-enable-hardware-graphics">More</a>
-    </article>
-        <article>
-        <h1 class="title"><a href="/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12">Ubuntu 13.10 install AMD Catalyst 13.12</a></h1>
-        <div class="info">
-            <div class="date">
-                <span class="icon icon-calendar"></span>
-                <a href="/archive/2014">2014-01-19</a>          </div>
-            <div class="category">
-                <span class="icon icon-folder-close"></span>
-                <a href="/category/IT">IT</a>           </div>
-            <div class="tag">
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Linux">Linux</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Note">Note</a></span>
-                <br />
-                                <span class="icon icon-tag"></span>
-                <span><a href="/tag/Ubuntu">Ubuntu</a></span>
-                <br />
-                            </div>
-            <div class="comments">
-                <span class="icon icon-comment"></span>
-                <a href="/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12/#disqus_thread">0 Comment</a>
-            </div>
-            <hr>
-            <div class="social_tool">
-                <div class="g-plusone" data-href="http://scar.simcz.tw/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12/" data-size="medium"></div>
-                <div class="fb-like" href="http://scar.simcz.tw/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12/" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-            </div>
-        </div>
-        <div class="content"><h2>不解</h2>
-
-<p>不知道為什麼，只要碰到顯示卡驅動程式的安裝，我就很容易讓我的機器爆炸，這一定有問題，所以還是趕快把這次成功安裝的過程記錄下來，避免之後又爆了。</p>
-
-<p>安裝驅動有這麼難嗎？很難，因為每次都爆炸XD</p>
-
-<p>平常我也不想去更新的我的顯示卡驅動，但是<code>Chrome</code>告訴我<code>ATI/AMD cards with older or third-party drivers</code>，我只是想開啟<code>WebGL</code>而已，為了能夠用<code>WebGL</code>還是更新吧。</p>
-
-</div>
-        <a class="more" href="/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12">More</a>
-    </article>
-        <article>
-        <h1 class="title"><a href="/article/2014/01/14/zsh-history-search-backward-and-forward">ZSH - history-search-backward/forward</a></h1>
+        <div id="container"><div id="article">
+    <article>
+        <h1 class="title">ZSH - history-search-backward/forward</h1>
         <div class="info">
             <div class="date">
                 <span class="icon icon-calendar"></span>
@@ -256,28 +89,43 @@ Ubuntu 13.10     : 5.0.2
 Arch Linux       : 5.0.5
 </code></pre>
 
+<!--more-->
+
+<p>算了至少功能沒有那就自己加上去，在<code>~/.zshrc</code>中加入以下兩行就行了。</p>
+
+<pre><code>bindkey "${key[Up]}" history-search-backward
+bindkey "${key[Down]}" history-search-forward
+</code></pre>
+
+<p>接著重起<code>terminal</code>或是<code>source .zshrc</code>一切就完成了。</p>
 </div>
-        <a class="more" href="/article/2014/01/14/zsh-history-search-backward-and-forward">More</a>
     </article>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'scarshow';
+        (function() {
+            var embed = document.createElement('script');
+            embed.type = 'text/javascript';
+            embed.async = true;
+            embed.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(embed);
+
+            var count = document.createElement('script');
+            count.async = true;
+            count.type = 'text/javascript';
+            count.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(count);
+        }());
+    </script>
         <div class="bar">
         <span class="new">
-                    </span>
+            <a href="/article/2014/01/19/ubuntu-13-10-install-amd-catalyst-13-12"><< Ubuntu 13.10 install AMD Catalyst 13.12</a>        </span>
         <span class="old">
-            <a href="/page/2">Older Posts >></a>        </span>
+            <a href="/article/2014/01/03/express-jade-less-coffee-with-livereload">Express + Jade/LESS/Coffee with LiveReload >></a>        </span>
         <span class="count">
-            1 / 8       </span>
+            5 / 36      </span>
     </div>
 </div>
-<script type="text/javascript">
-    var disqus_shortname = 'scarshow';
-    (function() {
-        var count = document.createElement('script');
-        count.async = true;
-        count.type = 'text/javascript';
-        count.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(count);
-    }());
-</script>
 <script type="text/javascript">
     (function() {
         var po = document.createElement('script');

@@ -18,84 +18,78 @@ class CSS
     private $_list;
 
     /**
-     * @var string
-     */
-    private $_dest;
-
-    /**
      * @param array
      * @param string
      */
-    public function __construct($list = [], $dest = null)
+    public function __construct()
     {
-        if (is_array($list)) {
-            $this->_list = $list;
-        }
-
-        if (is_string($dest)) {
-            $this->_dest = $dest;
-        }
+        $this->_list = [];
     }
 
     /**
-     * Add Path to List
+     * Append Path or List to List
+     *
+     * @param string
+     * @return object
+     */
+    public function append($list = null)
+    {
+        if (is_string($list)) {
+            $this->_list[] = $list;
+        }
+
+        if (is_array($list)) {
+            $this->_list = array_merge($this->_list, $list);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Packed CSS
+     *
+     * @return string
+     */
+    public function get($css = '')
+    {
+        if ('' === $css) {
+            foreach ((array) $this->_list as $src) {
+                if (!file_exists($src)) {
+                    continue;
+                }
+
+                $css .= file_get_contents($src);
+            }
+        }
+
+        $this->_list = [];
+
+        return $this->pack($css);
+    }
+
+    /**
+     * Save CSS to File
      *
      * @param string
      */
-    public function add($src = null)
-    {
-        if (is_string($src)) {
-            $this->_list[] = $src;
+    public function save($dest = null) {
+        if (!file_exists(dirname($dest))) {
+            mkdir(dirname($dest), 0755, true);
         }
-    }
 
-    /**
-     * Clean CSS List
-     */
-    public function clean()
-    {
-        $this->_list = [];
+        file_put_contents($dest, $this->get());
     }
 
     /**
      * Pack CSS
      *
      * @param string
-     */
-    public function pack($dest = null)
-    {
-        if (is_string($dest)) {
-            $this->_dest = $dest;
-        }
-
-        if (!file_exists(dirname($this->_dest))) {
-            mkdir(dirname($this->_dest), 0755, true);
-        }
-
-        $handle = fopen($this->_dest, 'w+');
-        foreach ((array) $this->_list as $src) {
-            if (!file_exists($src)) {
-                continue;
-            }
-
-            $css = file_get_contents($src);
-            $css = $this->replace($css);
-
-            fwrite($handle, $css);
-        }
-        fclose($handle);
-    }
-
-    /**
-     * Replace Character
-     *
-     * @param string
      * @return string
      */
-    private function replace($css)
+    private function pack($css)
     {
         // @todo: content: " (" fun() ") ";
-        
+
         $css = preg_replace('/[\r\t\n\f]/', '', $css);
         $css = preg_replace('/\/\*.+?\*\//', '', $css);
         $css = preg_replace('/[ ]+/', ' ', $css);
