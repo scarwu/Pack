@@ -8,7 +8,7 @@
  * @link        http://github.com/scarwu/Pack
  */
 
-use Pack;
+namespace Pack;
 
 class CSS
 {
@@ -17,6 +17,15 @@ class CSS
      */
     private $_list;
 
+    /**
+     * @var string
+     */
+    private $_dest;
+
+    /**
+     * @param array
+     * @param string
+     */
     public function __construct($list = [], $dest = null)
     {
         if (is_array($list)) {
@@ -28,6 +37,11 @@ class CSS
         }
     }
 
+    /**
+     * Add Path to List
+     *
+     * @param string
+     */
     public function add($src = null)
     {
         if (is_string($src)) {
@@ -36,19 +50,26 @@ class CSS
     }
 
     /**
-     * Css IO Setting
+     * Clean CSS List
+     */
+    public function clean()
+    {
+        $this->_list = [];
+    }
+
+    /**
+     * Pack Css
      *
-     * @param string
      * @param string
      */
     public function pack($dest = null)
     {
-        if (null !== $dest) {
+        if (is_string($dest)) {
             $this->_dest = $dest;
         }
 
-        if (!file_exists($this->_dest)) {
-            return false;
+        if (!file_exists(dirname($this->_dest))) {
+            mkdir(dirname($this->_dest), 0755, true);
         }
 
         $handle = fopen($this->_dest, 'w+');
