@@ -92,12 +92,31 @@ class CSS
         // Remove whitespace characters without space
         $css = preg_replace('/[\r\t\n\f]/', '', $css);
 
-        // Remove Comments
+        // Remove comments
         $css = preg_replace('/\/\*.+?\*\//', '', $css);
 
-        // Replace multi-space to single space
-        $css = preg_replace('/[ ]+/', ' ', $css);
+        // Explode with \"
+        $css = explode('"', $css);
+        foreach ($css as $index => $str) {
+            if (0 !== $index % 2) {
+                continue;
+            }
 
+            $css[$index] = $this->replaceSpace($str);
+        }
+        $css = implode('"', $css);
+
+        return $css;
+    }
+
+    /**
+     * Replace Space
+     *
+     * @param string
+     * @return $string
+     */
+    private function replaceSpace($css)
+    {
         $char = [
             ',' => [' ,', ', ', ' , '],
             '{' => [' {', '{ ', ' { '],
@@ -107,16 +126,23 @@ class CSS
             '!' => [' !', '! ', ' ! ']
         ];
 
-        $css = explode('"', $css);
+        // Explode with \'
+        $css = explode("'", $css);
         foreach ($css as $index => $str) {
-            if (0 === $index % 2) {
-                $css[$index] = trim($str);
-                foreach ($char as $replace => $search) {
-                    $css = str_replace($search, $replace, $css);
-                }
+            if (0 !== $index % 2) {
+                continue;
             }
+
+            // Replace multi-space to single space
+            $str = preg_replace('/[ ]+/', ' ', trim($str));
+
+            foreach ($char as $replace => $search) {
+                $str = str_replace($search, $replace, $str);
+            }
+
+            $css[$index] = $str;
         }
-        $css = implode('"', $css);
+        $css = implode("'", $css);
 
         return $css;
     }

@@ -30,3 +30,13 @@ $css->append("$root/css/normalize.css");
 
 // Pack CSS File
 $css->save("$root/tmp/output.css");
+
+$text = <<<EOF
+div .block{
+    width: 100%;
+    float: left;
+}
+EOF;
+
+echo $css->get($text) . "\n";
+echo $css->get('width: 90px; display: none;') . "\n";

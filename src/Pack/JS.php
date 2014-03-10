@@ -89,6 +89,11 @@ class JS
      */
     private function pack($js)
     {
+        // Remove Single-line comment
+
+        // Remove Mutli-line Comment
+
+        //
         return $js;
     }
 }
