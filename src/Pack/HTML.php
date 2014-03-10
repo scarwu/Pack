@@ -10,9 +10,6 @@
 
 namespace Pack;
 
-use Pack\JS;
-use Pack\CSS;
-
 class HTML
 {
     /**
@@ -57,7 +54,8 @@ class HTML
      *
      * @param string
      */
-    public function save($dest = null) {
+    public function save($dest = null)
+    {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);
         }
@@ -68,7 +66,8 @@ class HTML
     /**
      * Pack HTML
      */
-    private function pack($html) {
+    private function pack($html)
+    {
         $in_tag = false;
         $in_quotation_mark = false;
 
@@ -84,7 +83,7 @@ class HTML
                 $next_char = null;
             }
 
-            if ('<' === $char && !$in_tag ) {
+            if ('<' === $char && !$in_tag) {
                 $in_tag = true;
                 $result .= $char;
 
@@ -118,7 +117,7 @@ class HTML
                     if (' ' !== $pre_char) {
                         $result .= ' ';
                     }
-                    
+
                     continue;
                 }
 

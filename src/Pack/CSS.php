@@ -72,7 +72,8 @@ class CSS
      *
      * @param string
      */
-    public function save($dest = null) {
+    public function save($dest = null)
+    {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);
         }
@@ -88,10 +89,13 @@ class CSS
      */
     private function pack($css)
     {
-        // @todo: content: " (" fun() ") ";
-
+        // Remove whitespace characters without space
         $css = preg_replace('/[\r\t\n\f]/', '', $css);
+
+        // Remove Comments
         $css = preg_replace('/\/\*.+?\*\//', '', $css);
+
+        // Replace multi-space to single space
         $css = preg_replace('/[ ]+/', ' ', $css);
 
         $char = [
@@ -103,9 +107,16 @@ class CSS
             '!' => [' !', '! ', ' ! ']
         ];
 
-        foreach ($char as $replace => $search) {
-            $css = str_replace($search, $replace, $css);
+        $css = explode('"', $css);
+        foreach ($css as $index => $str) {
+            if (0 === $index % 2) {
+                $css[$index] = trim($str);
+                foreach ($char as $replace => $search) {
+                    $css = str_replace($search, $replace, $css);
+                }
+            }
         }
+        $css = implode('"', $css);
 
         return $css;
     }

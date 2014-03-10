@@ -72,7 +72,8 @@ class JS
      *
      * @param string
      */
-    public function save($dest = null) {
+    public function save($dest = null)
+    {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);
         }

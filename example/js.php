@@ -1,7 +1,7 @@
 <?php
 /**
  * JavaScript Pack Example
- * 
+ *
  * @package     Pack
  * @author      ScarWu
  * @copyright   Copyright (c) 2012-2014, ScarWu (http://scar.simcz.tw/)
