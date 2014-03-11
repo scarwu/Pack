@@ -1,11 +1,13 @@
 'use strict';
 
+// array /*
 var array = [
 	'a',
 	'b',
 	'c'
 ];
 
+// */ object
 var object = {
 	string: 'hello',
 	number: 3.14,
@@ -13,14 +15,18 @@ var object = {
 	array: []
 };
 
+/* function */
 var hello = function (name) {
-	console.log('hello ' + name);
+	console.log('hello ' + name); /* function */
 }
 
 function cast (func, param) {
-	func(param);
+	func(param); // function
 }
 
+/**
+// * function
+// */
 cast(hello, 'tony');
 
 cast(function (name) {

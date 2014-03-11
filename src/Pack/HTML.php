@@ -69,7 +69,7 @@ class HTML
     private function pack($html)
     {
         $in_tag = false;
-        $in_quotation_mark = false;
+        $in_quote = false;
 
         $chars = str_split($html);
         $result = '';
@@ -98,13 +98,13 @@ class HTML
             }
 
             if ('"' === $char && $in_tag) {
-                $in_quotation_mark = !$in_quotation_mark;
+                $in_quote = !$in_quote;
                 $result .= $char;
 
                 continue;
             }
 
-            if ($in_tag && !$in_quotation_mark) {
+            if ($in_tag && !$in_quote) {
                 if (in_array($pre_char, [' ', '=']) && ' ' === $char) {
                     continue;
                 }
@@ -124,7 +124,7 @@ class HTML
                 $result .= $char;
             }
 
-            if ($in_tag && $in_quotation_mark) {
+            if ($in_tag && $in_quote) {
                 if (in_array($pre_char, ['"', ';' ,'=']) && ' ' === $char) {
                     continue;
                 }
