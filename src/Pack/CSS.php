@@ -90,7 +90,7 @@ class CSS
     private function pack($css)
     {
         // Remove whitespace characters without space
-        $css = preg_replace('/[\r\t\n\f]/', '', $css);
+        $css = preg_replace('/[\r\n\t]/', '', $css);
 
         // Remove comments
         $css = preg_replace('/\/\*.+?\*\//', '', $css);

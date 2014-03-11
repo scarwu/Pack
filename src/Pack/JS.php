@@ -112,13 +112,15 @@ class JS
                     $in_comment = true;
                     $comment_type = 1;
                     $result = substr($result, 0, strlen($result) - 1);
+
                     continue;
                 }
 
                 if ('/*' === $pre_char . $char) {
                     $in_comment = true;
-                    $quote_type = 2;
+                    $comment_type = 2;
                     $result = substr($result, 0, strlen($result) - 1);
+
                     continue;
                 }
 
@@ -126,6 +128,7 @@ class JS
                     $in_quote = true;
                     $quote_type = 1;
                     $result .= $char;
+
                     continue;
                 }
 
@@ -133,8 +136,15 @@ class JS
                     $in_quote = true;
                     $quote_type = 2;
                     $result .= $char;
+                    
                     continue;
                 }
+
+                if (in_array($char, ["\n", "\r", "\t"])) {
+                    continue;
+                }
+
+
 
                 $result .= $char;
             }
@@ -150,7 +160,7 @@ class JS
                 }
 
                 if (2 === $comment_type) {
-                    if ('*/' === $pre_char . $char) {
+                    if ('*/' === $chars[$index - 1] . $char) {
                         $in_comment = false;
                         $comment_type = null;
 
