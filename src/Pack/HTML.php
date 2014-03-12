@@ -71,85 +71,96 @@ class HTML
         $in_tag = false;
         $in_quote = false;
 
+        $html = str_replace(["\r\n", "\r"], "\n", $html);
+
         $chars = str_split($html);
         $result = '';
 
         foreach ($chars as $index => $char) {
             $pre_char = substr($result, -1);
 
-            if (isset($chars[$index + 1])) {
-                $next_char = $chars[$index + 1];
-            } else {
-                $next_char = null;
-            }
-
-            if ('<' === $char && !$in_tag) {
-                $in_tag = true;
-                $result .= $char;
-
-                continue;
-            }
-
-            if ('>' === $char && $in_tag) {
-                $in_tag = false;
-                $result .= $char;
-
-                continue;
-            }
-
-            if ('"' === $char && $in_tag) {
-                $in_quote = !$in_quote;
-                $result .= $char;
-
-                continue;
-            }
-
             if ($in_tag && !$in_quote) {
-                if (in_array($pre_char, [' ', '=']) && ' ' === $char) {
-                    continue;
-                }
-
-                if (in_array($next_char, ['"', '=']) && ' ' === $char) {
-                    continue;
-                }
-
-                if (preg_match('/[\r\t\n\f]/', $char)) {
-                    if (' ' !== $pre_char) {
-                        $result .= ' ';
+                if ('"' === $char) {
+                    if (' ' === $pre_char) {
+                        $result = substr($result, 0, strlen($result) - 1);
                     }
 
+                    $in_quote = true;
+
+                    $result .= $char;
                     continue;
                 }
 
+                if ('>' === $char) {
+                    if (' ' === $pre_char) {
+                        $result = substr($result, 0, strlen($result) - 1);
+                    }
+
+                    $in_tag = false;
+
+                    $result .= $char;
+                    continue;
+                }
+
+                if ("\n" === $char || "\t" === $char) {
+                    continue;
+                }
+
+                if (' ' === $pre_char && ' ' === $char) {
+                    continue;
+                }
+
+                if ('<' === $pre_char && ' ' === $char) {
+                    continue;
+                }
+
+                if (' ' === $pre_char && '=' === $char) {
+                    $result = substr($result, 0, strlen($result) - 1);
+                }
+
                 $result .= $char;
+                continue;
             }
 
             if ($in_tag && $in_quote) {
-                if (in_array($pre_char, ['"', ';' ,'=']) && ' ' === $char) {
-                    continue;
-                }
-
-                if (in_array($next_char, ['"', ';' ,'=', ' ']) && ' ' === $char) {
-                    continue;
+                if ('"' === $char) {
+                    $in_quote = false;
                 }
 
                 $result .= $char;
+                continue;
             }
 
-            if (!$in_tag) {
+            if (!$in_tag && !$in_quote) {
+                if ('<' === $char) {
+                    if (' ' === $pre_char) {
+                        $result = substr($result, 0, strlen($result) - 1);
+                    }
+
+                    $in_tag = true;
+
+                    $result .= $char;
+                    continue;
+                }
+
+                if ("\n" === $char || "\t" === $char) {
+                    continue;
+                }
+
+                if (' ' === $pre_char && ' ' === $char) {
+                    continue;
+                }
+
                 if ('>' === $pre_char && ' ' === $char) {
                     continue;
                 }
 
-                if ('<' === $next_char && ' ' === $char) {
-                    continue;
-                }
-
-                if (preg_match('/[\r\t\n\f]/', $char)) {
-                    continue;
+                if (' ' === $pre_char && '<' === $char) {
+                    $result = substr($result, 0, strlen($result) - 1);
                 }
 
                 $result .= $char;
+                continue;
             }
         }
 

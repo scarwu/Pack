@@ -151,7 +151,7 @@ class JS
             }
 
             /**
-             * Check start tag of comment block 
+             * Check start tag of comment block
              */
             if ('//' === $pre_char . $char) {
                 $in_single_comment = true;

@@ -95,8 +95,8 @@ class CSS
         $in_double_quote = false;
 
         $skip_char = [
-            '{', '}', ',',
-            ':', ';', '!', '"', "'"
+            '{', '}', ',', ':', ';',
+            '!', '"', "'"
         ];
 
         $css = str_replace(["\r\n", "\r"], "\n", $css);
@@ -140,7 +140,7 @@ class CSS
             }
 
             /**
-             * Check start tag of comment block 
+             * Check start tag of comment block
              */
             if ('/*' === $pre_char . $char) {
                 $in_comment = true;
@@ -167,7 +167,7 @@ class CSS
                 if (' ' === $pre_char) {
                     $result = substr($result, 0, strlen($result) - 1);
                 }
-                
+
                 $in_double_quote = true;
 
                 $result .= $char;
