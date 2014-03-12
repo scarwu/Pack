@@ -89,18 +89,20 @@ class JS
      */
     private function pack($js)
     {
-        $in_comment = false;
-        $in_quote = false;
+        $in_single_comment = false;
+        $in_multiple_comment = false;
 
-        $comment_type = null; // 1 = single, 2 = multiple
-        $quote_type = null; // 1 = single, 2 = double
+        $in_single_quote = false;
+        $in_double_quote = false;
 
         $skip_char = [
             '(', ')', '{', '}', ',',
             '+', '-', '*', '/', '%',
-            '|', '&', '=', ':', ';',
-            '!', '?', '<', '>'
+            '|', '&', '=', '<', '>',
+            '!', '?', ':', ';'
         ];
+
+        $js = str_replace(["\r\n", "\r"], "\n", $js);
 
         $chars = str_split($js);
         $result = '';
@@ -108,106 +110,100 @@ class JS
         foreach ($chars as $index => $char) {
             $pre_char = substr($result, -1);
 
-            if (isset($chars[$index + 1])) {
-                $next_char = $chars[$index + 1];
-            } else {
-                $next_char = null;
+            /**
+             * Handle comment block and check end tag
+             */
+            if ($in_single_comment) {
+                if ("\n" === $char) {
+                    $in_single_comment = false;
+                }
+
+                continue;
             }
 
-            if (!$in_comment && !$in_quote) {
-                if ('//' === $pre_char . $char) {
-                    $in_comment = true;
-                    $comment_type = 1;
-                    $result = substr($result, 0, strlen($result) - 1);
-
-                    continue;
+            if ($in_multiple_comment) {
+                if ('*/' === $chars[$index - 1] . $char) {
+                    $in_multiple_comment = false;
                 }
 
-                if ('/*' === $pre_char . $char) {
-                    $in_comment = true;
-                    $comment_type = 2;
-                    $result = substr($result, 0, strlen($result) - 1);
+                continue;
+            }
 
-                    continue;
-                }
-
-                if ("'" === $char) {
-                    $in_quote = true;
-                    $quote_type = 1;
-                    $result .= $char;
-
-                    continue;
-                }
-
-                if ('"' === $char) {
-                    $in_quote = true;
-                    $quote_type = 2;
-                    $result .= $char;
-                    
-                    continue;
-                }
-
-                if (in_array($char, ["\n", "\r", "\t"])) {
-                    continue;
-                }
-
-                if (' ' === $pre_char && ' ' === $char) {
-                    continue;
-                }
-
-                if (' ' === $pre_char && in_array($char, $skip_char)) {
-                    $result = substr($result, 0, strlen($result) - 1);
-                }
-
-                if (' ' === $char && in_array($pre_char, $skip_char)) {
-                    continue;
+            /**
+             * Handle quote block and check end tag
+             */
+            if ($in_single_quote) {
+                if ("'" === $char && '\\' !== $pre_char) {
+                    $in_single_quote = false;
                 }
 
                 $result .= $char;
+                continue;
             }
 
-            if ($in_comment) {
-                if (1 === $comment_type) {
-                    if ("\n" === $char) {
-                        $in_comment = false;
-                        $comment_type = null;
-
-                        continue;
-                    }
+            if ($in_double_quote) {
+                if ('"' === $char && '\\' !== $pre_char) {
+                    $in_double_quote = false;
                 }
 
-                if (2 === $comment_type) {
-                    if ('*/' === $chars[$index - 1] . $char) {
-                        $in_comment = false;
-                        $comment_type = null;
-
-                        continue;
-                    }
-                }
-            }
-
-            if ($in_quote) {
                 $result .= $char;
-
-                if (1 === $quote_type) {
-                    if ("'" === $char && '\\' !== $pre_char) {
-                        $in_quote = false;
-                        $quote_type = null;
-
-                        continue;
-                    }
-                }
-
-                if (2 === $quote_type) {
-                    if ('"' === $char && '\\' !== $pre_char) {
-                        $in_quote = false;
-                        $quote_type = null;
-
-                        continue;
-                    }
-                }
+                continue;
             }
 
+            /**
+             * Check start tag of comment block 
+             */
+            if ('//' === $pre_char . $char) {
+                $in_single_comment = true;
+
+                $result = substr($result, 0, strlen($result) - 1);
+                continue;
+            }
+
+            if ('/*' === $pre_char . $char) {
+                $in_multiple_comment = true;
+
+                $result = substr($result, 0, strlen($result) - 1);
+                continue;
+            }
+
+            /**
+             * Check start tag of quote block
+             */
+            if ("'" === $char) {
+                $in_single_quote = true;
+
+                $result .= $char;
+                continue;
+            }
+
+            if ('"' === $char) {
+                $in_double_quote = true;
+
+                $result .= $char;
+                continue;
+            }
+
+            /**
+             * Handle normal block
+             */
+            if ("\n" === $char || "\t" === $char) {
+                continue;
+            }
+
+            if (' ' === $pre_char && ' ' === $char) {
+                continue;
+            }
+
+            if (' ' === $pre_char && in_array($char, $skip_char)) {
+                $result = substr($result, 0, strlen($result) - 1);
+            }
+
+            if (' ' === $char && in_array($pre_char, $skip_char)) {
+                continue;
+            }
+
+            $result .= $char;
         }
 
         return $result;
