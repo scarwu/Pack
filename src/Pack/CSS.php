@@ -89,61 +89,113 @@ class CSS
      */
     private function pack($css)
     {
-        // Remove whitespace characters without space
-        $css = preg_replace('/[\r\n\t]/', '', $css);
+        $in_comment = false;
 
-        // Remove comments
-        $css = preg_replace('/\/\*.+?\*\//', '', $css);
+        $in_single_quote = false;
+        $in_double_quote = false;
 
-        // Explode with \"
-        $css = explode('"', $css);
-        foreach ($css as $index => $str) {
-            if (0 !== $index % 2) {
-                continue;
-            }
-
-            $css[$index] = $this->replaceSpace($str);
-        }
-        $css = implode('"', $css);
-
-        return $css;
-    }
-
-    /**
-     * Replace Space
-     *
-     * @param string
-     * @return $string
-     */
-    private function replaceSpace($css)
-    {
-        $char = [
-            ',' => [' ,', ', ', ' , '],
-            '{' => [' {', '{ ', ' { '],
-            '}' => [' }', '} ', ' } '],
-            ':' => [' :', ': ', ' : '],
-            ';' => [' ;', '; ', ' ; '],
-            '!' => [' !', '! ', ' ! ']
+        $skip_char = [
+            '{', '}', ',',
+            ':', ';', '!', '"', "'"
         ];
 
-        // Explode with \'
-        $css = explode("'", $css);
-        foreach ($css as $index => $str) {
-            if (0 !== $index % 2) {
+        $css = str_replace(["\r\n", "\r"], "\n", $css);
+
+        $chars = str_split($css);
+        $result = '';
+
+        foreach ($chars as $index => $char) {
+            $pre_char = substr($result, -1);
+
+            /**
+             * Handle comment block and check end tag
+             */
+            if ($in_comment) {
+                if ('*/' === $chars[$index - 1] . $char) {
+                    $in_comment = false;
+                }
+
                 continue;
             }
 
-            // Replace multi-space to single space
-            $str = preg_replace('/[ ]+/', ' ', trim($str));
+            /**
+             * Handle quote block and check end tag
+             */
+            if ($in_single_quote) {
+                if ("'" === $char && '\\' !== $pre_char) {
+                    $in_single_quote = false;
+                }
 
-            foreach ($char as $replace => $search) {
-                $str = str_replace($search, $replace, $str);
+                $result .= $char;
+                continue;
             }
 
-            $css[$index] = $str;
-        }
-        $css = implode("'", $css);
+            if ($in_double_quote) {
+                if ('"' === $char && '\\' !== $pre_char) {
+                    $in_double_quote = false;
+                }
 
-        return $css;
+                $result .= $char;
+                continue;
+            }
+
+            /**
+             * Check start tag of comment block 
+             */
+            if ('/*' === $pre_char . $char) {
+                $in_comment = true;
+
+                $result = substr($result, 0, strlen($result) - 1);
+                continue;
+            }
+
+            /**
+             * Check start tag of quote block
+             */
+            if ("'" === $char) {
+                if (' ' === $pre_char) {
+                    $result = substr($result, 0, strlen($result) - 1);
+                }
+
+                $in_single_quote = true;
+
+                $result .= $char;
+                continue;
+            }
+
+            if ('"' === $char) {
+                if (' ' === $pre_char) {
+                    $result = substr($result, 0, strlen($result) - 1);
+                }
+                
+                $in_double_quote = true;
+
+                $result .= $char;
+                continue;
+            }
+
+            /**
+             * Handle normal block
+             */
+            if ("\n" === $char || "\t" === $char) {
+                continue;
+            }
+
+            if (' ' === $pre_char && ' ' === $char) {
+                continue;
+            }
+
+            if (' ' === $pre_char && in_array($char, $skip_char)) {
+                $result = substr($result, 0, strlen($result) - 1);
+            }
+
+            if (' ' === $char && in_array($pre_char, $skip_char)) {
+                continue;
+            }
+
+            $result .= $char;
+        }
+
+        return $result;
     }
 }
