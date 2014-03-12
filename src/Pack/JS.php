@@ -95,6 +95,13 @@ class JS
         $comment_type = null; // 1 = single, 2 = multiple
         $quote_type = null; // 1 = single, 2 = double
 
+        $skip_char = [
+            '(', ')', '{', '}', ',',
+            '+', '-', '*', '/', '%',
+            '|', '&', '=', ':', ';',
+            '!', '?', '<', '>'
+        ];
+
         $chars = str_split($js);
         $result = '';
 
@@ -144,7 +151,17 @@ class JS
                     continue;
                 }
 
+                if (' ' === $pre_char && ' ' === $char) {
+                    continue;
+                }
 
+                if (' ' === $pre_char && in_array($char, $skip_char)) {
+                    $result = substr($result, 0, strlen($result) - 1);
+                }
+
+                if (' ' === $char && in_array($pre_char, $skip_char)) {
+                    continue;
+                }
 
                 $result .= $char;
             }

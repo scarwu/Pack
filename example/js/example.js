@@ -1,7 +1,7 @@
 'use strict';
 
 // array /*
-var array = [
+var            array = [
 	'a',
 	'b',
 	'c'
