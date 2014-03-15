@@ -10,6 +10,9 @@
 
 namespace Pack;
 
+use Pack\JS;
+use Pack\CSS;
+
 class HTML
 {
     /**
@@ -71,6 +74,19 @@ class HTML
         $in_tag = false;
         $in_quote = false;
 
+        $in_code_tag = false;
+
+        $in_script_tag = false;
+
+        $in_style_tag = false;
+        $in_style_attribute = false;
+
+        $script = '';
+        $style = '';
+
+        $js_pack = new JS();
+        $css_pack = new CSS();
+
         $html = str_replace(["\r\n", "\r"], "\n", $html);
 
         $chars = str_split($html);
@@ -81,6 +97,7 @@ class HTML
 
             if ($in_tag && !$in_quote) {
                 if ('"' === $char) {
+                    // ' "'
                     if (' ' === $pre_char) {
                         $result = substr($result, 0, strlen($result) - 1);
                     }
@@ -92,6 +109,7 @@ class HTML
                 }
 
                 if ('>' === $char) {
+                    // ' >'
                     if (' ' === $pre_char) {
                         $result = substr($result, 0, strlen($result) - 1);
                     }
@@ -106,14 +124,17 @@ class HTML
                     continue;
                 }
 
+                // '  '
                 if (' ' === $pre_char && ' ' === $char) {
                     continue;
                 }
 
+                // '< '
                 if ('<' === $pre_char && ' ' === $char) {
                     continue;
                 }
 
+                // ' ='
                 if (' ' === $pre_char && '=' === $char) {
                     $result = substr($result, 0, strlen($result) - 1);
                 }
@@ -133,6 +154,7 @@ class HTML
 
             if (!$in_tag && !$in_quote) {
                 if ('<' === $char) {
+                    // ' <'
                     if (' ' === $pre_char) {
                         $result = substr($result, 0, strlen($result) - 1);
                     }
@@ -147,14 +169,17 @@ class HTML
                     continue;
                 }
 
+                // '  '
                 if (' ' === $pre_char && ' ' === $char) {
                     continue;
                 }
 
+                // '> '
                 if ('>' === $pre_char && ' ' === $char) {
                     continue;
                 }
 
+                // ' <'
                 if (' ' === $pre_char && '<' === $char) {
                     $result = substr($result, 0, strlen($result) - 1);
                 }
