@@ -74,8 +74,6 @@ class HTML
         $in_tag = false;
         $in_quote = false;
 
-        $in_code_tag = false;
-
         $in_script_tag = false;
 
         $in_style_tag = false;
