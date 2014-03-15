@@ -1,1 +1,3 @@
 example/tmp
+vendor
+composer.lock
