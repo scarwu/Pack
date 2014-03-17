@@ -19,16 +19,16 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
                 'width:100%;height:200px;'
             ], [
                 ' content : " ( " attr() " ) " ; ',
-                'content:" ( "attr()" ) " ;'
+                'content:" ( "attr()" ) ";'
             ], [
                 " content : ' email ' ; ",
                 "content:' email ';"
             ], [
-                ' color : #000000 !impotant ; ',
+                ' color : #000000 !important ; ',
                 'color:#000000!important;'
             ], [
                 ' border : 1px red solid ; ',
-                'border:1px red solid'
+                'border:1px red solid;'
             ]
         ];
     }
@@ -47,7 +47,7 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
                 'div{display:inline-block;width:200px;}'
             ], [
                 " div > span { color : #333 ; }",
-                'div>a{color:#333;}'
+                'div>span{color:#333;}'
             ], [
                 " div ~ span { color : #333 ; }",
                 'div~span{color:#333;}'
@@ -56,13 +56,13 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
                 'div,span{color:#333;}'
             ], [
                 " #main div { width : 100px ; }",
-                '#main duiv{}'
+                '#main div{width:100px;}'
             ], [
-                "",
-                ''
+                " .block { display : block; } ",
+                '.block{display:block;}'
             ], [
-                "",
-                ''
+                " a:hover { background : #666; } ",
+                'a:hover{background:#666;}'
             ], [
                 "",
                 ''

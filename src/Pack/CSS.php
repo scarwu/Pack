@@ -96,7 +96,7 @@ class CSS
 
         $skip_char = [
             '{', '}', ',', ':', ';',
-            '!', '"', "'"
+            '!', '"', "'", '~', '>'
         ];
 
         $css = str_replace(["\r\n", "\r"], "\n", $css);
@@ -196,6 +196,6 @@ class CSS
             $result .= $char;
         }
 
-        return $result;
+        return trim($result);
     }
 }
