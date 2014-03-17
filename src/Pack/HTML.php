@@ -49,7 +49,7 @@ class HTML
 
         $this->_path = null;
 
-        return $this->pack($html);
+        return $this->parse($html);
     }
 
     /**
@@ -67,9 +67,9 @@ class HTML
     }
 
     /**
-     * Pack HTML
+     * Parse HTML
      */
-    private function pack($html)
+    private function parse($html)
     {
         $in_tag = false;
         $in_quote = false;
@@ -186,6 +186,6 @@ class HTML
             }
         }
 
-        return $result;
+        return trim($result);
     }
 }

@@ -64,7 +64,7 @@ class JS
 
         $this->_list = [];
 
-        return $this->pack($js);
+        return $this->parse($js);
     }
 
     /**
@@ -82,12 +82,12 @@ class JS
     }
 
     /**
-     * Pack JavaScript
+     * Parse JavaScript
      *
      * @param string
      * @return string
      */
-    private function pack($js)
+    private function parse($js)
     {
         $in_single_comment = false;
         $in_multiple_comment = false;
@@ -206,6 +206,6 @@ class JS
             $result .= $char;
         }
 
-        return $result;
+        return trim($result);
     }
 }

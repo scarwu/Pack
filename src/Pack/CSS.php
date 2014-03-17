@@ -64,7 +64,7 @@ class CSS
 
         $this->_list = [];
 
-        return $this->pack($css);
+        return $this->parse($css);
     }
 
     /**
@@ -82,12 +82,12 @@ class CSS
     }
 
     /**
-     * Pack CSS
+     * Parse CSS
      *
      * @param string
      * @return string
      */
-    private function pack($css)
+    private function parse($css)
     {
         $in_comment = false;
 
@@ -96,7 +96,8 @@ class CSS
 
         $skip_char = [
             '{', '}', ',', ':', ';',
-            '!', '"', "'", '~', '>'
+            '!', '"', "'", '~', '>',
+            '+'
         ];
 
         $css = str_replace(["\r\n", "\r"], "\n", $css);

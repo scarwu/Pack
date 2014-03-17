@@ -37,35 +37,44 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "\ndiv\n{\n\tdisplay : inline-block;\n\twidth : 200px ; }\n",
+                "\ndiv\n{\n\tdisplay : inline-block;\n\twidth : 200px ; }\n ",
                 'div{display:inline-block;width:200px;}'
             ], [
-                "\rdiv\r{\r\tdisplay : inline-block;\r\twidth : 200px ; }\r",
+                "\rdiv\r{\r\tdisplay : inline-block;\r\twidth : 200px ; }\r ",
                 'div{display:inline-block;width:200px;}'
             ], [
-                "\r\ndiv\r\n{\r\n\tdisplay : inline-block ;\r\n\twidth : 200px ; }\r\n",
+                "\r\ndiv\r\n{\r\n\tdisplay : inline-block ;\r\n\twidth : 200px ; }\r\n ",
                 'div{display:inline-block;width:200px;}'
             ], [
-                " div > span { color : #333 ; }",
-                'div>span{color:#333;}'
+                " div > span { } ",
+                'div>span{}'
             ], [
-                " div ~ span { color : #333 ; }",
-                'div~span{color:#333;}'
+                " div ~ span { } ",
+                'div~span{}'
             ], [
-                " div , span { color : #333 ; }",
-                'div,span{color:#333;}'
+                " div , span { } ",
+                'div,span{}'
             ], [
-                " #main div { width : 100px ; }",
-                '#main div{width:100px;}'
+                " div + span { } ",
+                'div+span{}'
             ], [
-                " .block { display : block; } ",
-                '.block{display:block;}'
+                " #main div { } ",
+                '#main div{}'
             ], [
-                " a:hover { background : #666; } ",
-                'a:hover{background:#666;}'
+                " .block { } ",
+                '.block{}'
             ], [
-                "",
-                ''
+                " a:hover { } ",
+                'a:hover{}'
+            ], [
+                " a:nth-child(odd) { } ",
+                'a:nth-child(odd){}'
+            ], [
+                " div::before { } ",
+                'div::before{}'
+            ], [
+                " div[title=name] { } ",
+                'div[title=name]{}'
             ]
         ];
     }
@@ -74,14 +83,20 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
-                ''
+                " div { width : 100% ; /* color : black; */ }",
+                'div{width:100%;}'
             ], [
-                "",
-                ''
+                " /* style */ div { width : 100% ; }",
+                'div{width:100%;}'
             ], [
-                "",
-                ''
+                " div { /*min-*/width : 100% ; }",
+                'div{width:100%;}'
+            ], [
+                " div { width : 100%/*px*/ ; }",
+                'div{width:100%;}'
+            ], [
+                " div { margin /*-top*/ : 100px ; }",
+                'div{margin:100px;}'
             ]
         ];
     }
