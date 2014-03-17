@@ -1,8 +1,5 @@
 <?php
 
-$root = realpath(dirname(__FILE__));
-require "$root/../src/Pack/CSS.php";
-
 use Pack\CSS;
 
 class CSSPackTest extends PHPUnit_Framework_TestCase
