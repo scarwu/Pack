@@ -79,8 +79,7 @@ class HTML
         $in_style_tag = false;
         $in_style_attribute = false;
 
-        $script = '';
-        $style = '';
+        $text = '';
 
         $js_pack = new JS();
         $css_pack = new CSS();
