@@ -14,7 +14,7 @@ if (!file_exists("$root/tmp")) {
     mkdir("$root/tmp", 0755);
 }
 
-require "$root/../src/Pack/CSS.php";
+require "$root/../vendor/autoload.php";
 
 // Initialize CSS Packer
 $css = new Pack\CSS();

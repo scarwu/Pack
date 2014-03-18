@@ -10,9 +10,6 @@
 
 namespace Pack;
 
-use Pack\JS;
-use Pack\CSS;
-
 class HTML
 {
     /**
