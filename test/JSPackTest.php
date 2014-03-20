@@ -44,11 +44,41 @@ class JSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
-                ''
+                ' console.log ( i++ + ++i ) ; ',
+                'console.log(i++ + ++i);'
             ], [
-                "",
-                ''
+                ' console.log ( i++ - ++i ) ; ',
+                'console.log(i++-++i);'
+            ], [
+                ' console.log ( i-- - --i ) ; ',
+                'console.log(i-- - --i);'
+            ], [
+                ' console.log ( i-- + --i ) ; ',
+                'console.log(i--+--i);'
+            ], [
+                ' console.log ( i-- - ++i ) ; ',
+                'console.log(i-- -++i);'
+            ], [
+                ' console.log ( i++ + --i ) ; ',
+                'console.log(i++ +--i);'
+            ], [
+                ' console.log ( i-- - --i * i-- + --i ) ; ',
+                'console.log(i-- - --i*i--+--i);'
+            ], [
+                ' console.log ( i++ - ++i / i++ + ++i ) ; ',
+                'console.log(i++-++i/i++ + ++i);'
+            ], [
+                ' console.log ( "foo" + "bar" ) ; ',
+                'console.log("foo"+"bar");'
+            ], [
+                ' console.log ( 25 % 5 ) ; ',
+                'console.log(25%5);'
+            ], [
+                ' console.log ( 25 * 5 ) ; ',
+                'console.log(25*5);'
+            ], [
+                ' console.log ( 25 / 5 ) ; ',
+                'console.log(25/5);'
             ]
         ];
     }
@@ -57,11 +87,23 @@ class JSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
-                ''
+                " console.log ( ' hello ' ) ; ",
+                "console.log(' hello ');"
             ], [
-                "",
-                ''
+                ' console.log ( " hello " ) ; ',
+                'console.log(" hello ");'
+            ], [
+                " console.log ( ' It\'s blue. ' ) ; ",
+                "console.log(' It\'s blue. ');"
+            ], [
+                ' console.log ( " \"Oni\" is means ghost. " ) ; ',
+                'console.log(" \"Oni\" is means ghost. ");'
+            ], [
+                " console.log ( ' \'\"\' ' ) ; ",
+                "console.log(' \'\"\' ');"
+            ], [
+                ' console.log ( " \"\'\" " ) ; ',
+                'console.log(" \"\'\" ");'
             ]
         ];
     }
@@ -75,6 +117,9 @@ class JSPackTest extends PHPUnit_Framework_TestCase
             ], [
                 "",
                 ''
+            ], [
+                "",
+                ''
             ]
         ];
     }
@@ -83,11 +128,17 @@ class JSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
+                " \n// line 1\nfoobar();\n// line 3\n ",
+                'foobar();'
+            ], [
+                " // line 1 /*\nfoobar();\n// line 3 */ ",
+                'foobar();'
+            ], [
+                " /* // line 1\n'use strict';\n// line 3 */",
                 ''
             ], [
-                "",
-                ''
+                "/**\n * foobar\n**/\nfoobar();",
+                'foobar();'
             ]
         ];
     }
