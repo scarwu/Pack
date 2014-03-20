@@ -25,14 +25,6 @@ class HTMLPackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider commentProvider
-     */
-    public function testComment($input, $output)
-    {
-        $this->assertEquals($this->packer->get($input), $output);
-    }
-
-    /**
      * @dataProvider mutlipleLineProvider
      */
     public function testMutlipleLine($input, $output)
@@ -44,29 +36,16 @@ class HTMLPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
-                ''
+                ' < div id = "main" class = "block" > < /div >',
+                '<div id="main" class="block"></div>'
             ], [
-                "",
-                ''
+                '< img src = "001.jpg" / >',
+                '<img src="001.jpg"/>'
             ]
         ];
     }
 
     public function contentProvider()
-    {
-        return [
-            [
-                "",
-                ''
-            ], [
-                "",
-                ''
-            ]
-        ];
-    }
-
-    public function commentProvider()
     {
         return [
             [

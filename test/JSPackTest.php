@@ -79,6 +79,24 @@ class JSPackTest extends PHPUnit_Framework_TestCase
             ], [
                 ' console.log ( 25 / 5 ) ; ',
                 'console.log(25/5);'
+            ], [
+                ' if ( i > 0 || i < 100 ) { console.log ( i ) ; } ',
+                'if(i>0||i<100){console.log(i);}'
+            ], [
+                ' if ( i <= 0 || i >= 100 ) { console.log ( i ) ; } ',
+                'if(i<=0||i>=100){console.log(i);}'
+            ], [
+                ' if ( i == 0 && ( j <= 100 && j >= 0 ) ) { console.log ( i ) ; } ',
+                'if(i==0&&(j<=100&&j>=0)){console.log(i);}'
+            ], [
+                ' for (var i in list) { console.log( i ) ; } ',
+                'for(var i in list){console.log(i);}'
+            ], [
+                ' while ( true ) { console.log( i ) ; break ; } ',
+                'while(true){console.log(i);break;}'
+            ], [
+                ' do { console.log( i ) ; break ; } while ( true ) ; ',
+                'do{console.log(i);break;}while(true);'
             ]
         ];
     }
@@ -112,14 +130,20 @@ class JSPackTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                "",
-                ''
+                " \nvar foobar = function ( name )\n{\n\tconsole.log ( name ) ;\n\t} ;\n",
+                'var foobar=function(name){console.log(name);};'
             ], [
-                "",
-                ''
+                " \rvar foobar = function ( name )\r{\r\tconsole.log ( name ) ;\r\t} ;\r",
+                'var foobar=function(name){console.log(name);};'
             ], [
-                "",
-                ''
+                " \r\nvar foobar = function ( name )\r\n{\r\n\tconsole.log ( name ) ;\r\n\t} ;\r\n",
+                'var foobar=function(name){console.log(name);};'
+            ], [
+                " \nfunction hi ( name )\n{\n\tconsole.log( name ) ;\n} ",
+                'function hi(name){console.log(name);}'
+            ], [
+                " \n'use strict';\nvar list = {\n\ta : 'str' ,\n\tb : [ 1 , 2 ] ,\n\tc : {\n\t\td : 3 ,\n\t\te : 4\n\t}\n} ;",
+                '\'use strict\';var list={a:\'str\',b:[1,2],c:{d:3,e:4}};'
             ]
         ];
     }

@@ -133,6 +133,11 @@ class HTML
                     $output = substr($output, 0, strlen($output) - 1);
                 }
 
+                // ' /'
+                if (' ' === $pre_output_char && '/' === $char) {
+                    $output = substr($output, 0, strlen($output) - 1);
+                }
+
                 $output .= $char;
                 continue;
             }
