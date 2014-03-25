@@ -8,7 +8,7 @@
  * @link        http://github.com/scarwu/Pack
  */
 
-namespace ScarWu\Pack;
+namespace Pack;
 
 class HTML
 {

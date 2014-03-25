@@ -16,10 +16,8 @@ if (!file_exists("$root/tmp")) {
 
 require "$root/vendor/autoload.php";
 
-use ScarWu\Pack\HTML;
-
 // Initialize HTML Packer
-$html = new HTML();
+$html = new Pack\HTML();
 
 $html->set("$root/example/html/express-jade-less-coffee-with-livereload.html");
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * JavaScript Pack
+ * CSS Pack
  *
  * @package     Pack
  * @author      ScarWu
@@ -8,9 +8,9 @@
  * @link        http://github.com/scarwu/Pack
  */
 
-namespace ScarWu\Pack;
+namespace Pack;
 
-class JS
+class CSS
 {
     /**
      * @var array
@@ -46,29 +46,29 @@ class JS
     }
 
     /**
-     * Get Packed JavaScript
+     * Get Packed CSS
      *
      * @return string
      */
-    public function get($js = '')
+    public function get($css = '')
     {
-        if ('' === $js) {
+        if ('' === $css) {
             foreach ((array) $this->_list as $src) {
                 if (!file_exists($src)) {
                     continue;
                 }
 
-                $js .= file_get_contents($src);
+                $css .= file_get_contents($src);
             }
         }
 
         $this->_list = [];
 
-        return $this->parse($js);
+        return $this->parse($css);
     }
 
     /**
-     * Save JavaScript to File
+     * Save CSS to File
      *
      * @param string
      */
@@ -82,25 +82,23 @@ class JS
     }
 
     /**
-     * Parse JavaScript
+     * Parse CSS
      *
      * @param string
      * @return string
      */
     private function parse($input)
     {
-        $in_single_comment = false;
-        $in_multiple_comment = false;
+        $in_comment = false;
 
         $in_single_quote = false;
         $in_double_quote = false;
 
         $skip_char = [
-            '(', ')', '{', '}', ',',
-            '+', '-', '*', '/', '%',
-            '|', '&', '=', '<', '>',
-            '!', '?', ':', ';', '[',
-            ']'
+            '{', '}', '[', ']', '!',
+            '(', ')', ':', ';', ',',
+            '+', '=', '~', '"', "'",
+            '>', '#', '.'
         ];
 
         $input = str_replace(["\r\n", "\r"], "\n", $input);
@@ -114,17 +112,9 @@ class JS
             /**
              * Handle comment block and check end tag
              */
-            if ($in_single_comment) {
-                if ("\n" === $char) {
-                    $in_single_comment = false;
-                }
-
-                continue;
-            }
-
-            if ($in_multiple_comment) {
+            if ($in_comment) {
                 if ('*/' === $pre_input_char . $char) {
-                    $in_multiple_comment = false;
+                    $in_comment = false;
                 }
 
                 continue;
@@ -154,15 +144,8 @@ class JS
             /**
              * Check start tag of comment block
              */
-            if ('//' === $pre_output_char . $char) {
-                $in_single_comment = true;
-
-                $output = substr($output, 0, strlen($output) - 1);
-                continue;
-            }
-
             if ('/*' === $pre_output_char . $char) {
-                $in_multiple_comment = true;
+                $in_comment = true;
 
                 $output = substr($output, 0, strlen($output) - 1);
                 continue;
@@ -172,6 +155,10 @@ class JS
              * Check start tag of quote block
              */
             if ("'" === $char) {
+                if (' ' === $pre_output_char) {
+                    $output = substr($output, 0, strlen($output) - 1);
+                }
+
                 $in_single_quote = true;
 
                 $output .= $char;
@@ -179,6 +166,10 @@ class JS
             }
 
             if ('"' === $char) {
+                if (' ' === $pre_output_char) {
+                    $output = substr($output, 0, strlen($output) - 1);
+                }
+
                 $in_double_quote = true;
 
                 $output .= $char;
@@ -193,18 +184,6 @@ class JS
             }
 
             if (' ' === $char && ' ' === $pre_output_char) {
-                continue;
-            }
-
-            // i++ + ++i
-            if ('+' === $char && ' ' === $pre_input_char && '+' === $pre_output_char) {
-                $output .= " $char";
-                continue;
-            }
-
-            // i-- - --i
-            if ('-' === $char && ' ' === $pre_input_char && '-' === $pre_output_char) {
-                $output .= " $char";
                 continue;
             }
 

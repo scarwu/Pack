@@ -16,10 +16,8 @@ if (!file_exists("$root/tmp")) {
 
 require "$root/vendor/autoload.php";
 
-use ScarWu\Pack\CSS;
-
 // Initialize CSS Packer
-$css = new CSS();
+$css = new Pack\CSS();
 
 // Append CSS List
 $css->append([

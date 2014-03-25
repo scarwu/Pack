@@ -1,6 +1,6 @@
 <?php
 
-use ScarWu\Pack\CSS;
+use Pack\CSS;
 
 class CSSPackTest extends PHPUnit_Framework_TestCase
 {

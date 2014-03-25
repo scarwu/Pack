@@ -16,10 +16,8 @@ if (!file_exists("$root/tmp")) {
 
 require "$root/vendor/autoload.php";
 
-use ScarWu\Pack\JS;
-
 // Initialize JavaScript Packer
-$js = new JS();
+$js = new Pack\JS();
 
 // Append JavaScript List
 $js->append([
