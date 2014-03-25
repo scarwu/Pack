@@ -1,0 +1,480 @@
+
+<!doctype html>
+<html lang="zh-tw">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="description" content="記錄學習過程、生活以及一些想說的話。">
+	<meta name="keywords" content="ScarShow,刀疤說,ScarWu,刀疤,node,nodejs,express,jade,less,coffee,coffeescript,livereload">
+
+	<meta name="og:url" content="http://scar.simcz.tw/">
+	<meta name="og:title" content="Express + Jade/LESS/Coffee with LiveReload | ScarShow | 刀疤說">
+	<meta name="og:description" content="記錄學習過程、生活以及一些想說的話。">
+	<meta name="og:image" content="http://scar.simcz.tw/images/icon.jpg">
+	<meta name="og:type" content="blog">
+
+	<title>Express + Jade/LESS/Coffee with LiveReload | ScarShow | 刀疤說</title>
+	
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+	<link rel="stylesheet" href="/theme/main.css">
+	<link rel="canonical" href="http://scar.simcz.tw/scar.simcz.tw/">
+	<link rel="author" href="https://plus.google.com/+ScarWu">
+	<link rel="image_src" href="http://scar.simcz.tw/images/icon.jpg" />
+	<link rel="shortcut icon" href="http://scar.simcz.tw/favicon.ico" />
+</head>
+<body>
+	<header>
+		<hgroup>
+			<h1><a href="/">ScarShow</a></h1>
+			<hr />
+			<h2>I know that I don't know</h2>
+		</hgroup>
+	</header>
+	<nav>
+		<span class="left">
+			<a href="/about">About</a>
+			<a href="/works">Works</a>
+			<a href="/contact">Contact</a>
+		</span>
+		<span class="home">
+			<a href="/">Home</a>
+			<span class="arrow"></span>
+		</span>
+		<span class="right">
+			<a href="/archive">Archive</a>
+			<a href="/category">Category</a>
+			<a href="/tag">Tag</a>
+		</span>
+	</nav>
+	<div id="main">
+		<div id="container"><div id="article">
+	<article>
+		<h1 class="title">Express + Jade/LESS/Coffee with LiveReload</h1>
+		<div class="info">
+			<div class="date">
+				<span class="icon icon-calendar"></span>
+				<a href="/archive/2014">2014-01-03</a>			</div>
+			<div class="category">
+				<span class="icon icon-folder-close"></span>
+				<a href="/category/IT">IT</a>			</div>
+			<div class="tag">
+								<span class="icon icon-tag"></span>
+				<span><a href="/tag/Express">Express</a></span>
+				<br />
+								<span class="icon icon-tag"></span>
+				<span><a href="/tag/JavaScript">JavaScript</a></span>
+				<br />
+								<span class="icon icon-tag"></span>
+				<span><a href="/tag/NodeJS">NodeJS</a></span>
+				<br />
+							</div>
+			<div class="comments">
+				<span class="icon icon-comment"></span>
+				<a href="/article/2014/01/03/express-jade-less-coffee-with-livereload/#disqus_thread">0 Comment</a>
+			</div>
+			<hr>
+			<div class="social_tool">
+				<div class="g-plusone" data-href="http://scar.simcz.tw/article/2014/01/03/express-jade-less-coffee-with-livereload/" data-size="medium"></div>
+				<div class="fb-like" href="http://scar.simcz.tw/article/2014/01/03/express-jade-less-coffee-with-livereload/" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
+			</div>
+		</div>
+		<div class="content"><h2>廢話</h2>
+
+<p>2014年的第一篇文，去年算是生中的轉折，從今年開始已不是學生，但是學習不能停止，所以趁著比較有空的時候把TODO中要學的東西全部湊合在一起，混在一起當撒尿牛丸！</p>
+
+<p>平常喜歡自幹習慣了，難得來用用別人已經做好的東西。這邊就先來用<code>Express</code>來搭配其它東西來開發網站。這邊用到的套件有<code>Jade</code>、<code>LESS</code>、<code>CoffeeScript</code>以及<code>LiveReload</code>。</p>
+
+<!--more-->
+
+<h3><a href="http://expressjs.com/" target="_blank">Express</a></h3>
+
+<blockquote>
+  <p>"web applicaion framework for node"</p>
+</blockquote>
+
+<p>可用於建立網站應用程式。是一套流行的<code>NodeJS</code>套件。</p>
+
+<h3><a href="http://jade-lang.com/" target="_blank">Jade</a></h3>
+
+<blockquote>
+  <p>"Node Template Engine"</p>
+</blockquote>
+
+<p>擁有自己一套簡潔語法以及新的特性，用來產生HTML格式。</p>
+
+<h3><a href="http://lesscss.org/" target="_blank">LESS</a></h3>
+
+<blockquote>
+  <p>"The dynamic stylesheet language"</p>
+</blockquote>
+
+<p>支援<code>Variable</code>、<code>Mixin</code>、<code>Nested Rule</code>...等，並可以編譯成<code>CSS</code>供瀏覽器使用。</p>
+
+<h3><a href="http://coffeescript.org/" target="_blank">CoffeeScript</a></h3>
+
+<blockquote>
+  <p>"CoffeeScript is a little language that compiles into JavaScript"</p>
+</blockquote>
+
+<p>它將<code>JavaScript</code>的語法簡化，並提供一些新的特性來強化，可產生出符合規定且嚴謹的<code>JavaScript</code>程式碼。</p>
+
+<p>它剛出來的時候超夯的，只是我一直都沒有去使用它。</p>
+
+<h3><a href="http://livereload.com/" target="_blank">LiveReload</a></h3>
+
+<blockquote>
+  <p>"a happy land where browsers don't need a Refresh button"</p>
+</blockquote>
+
+<p>寫網頁最常做的事情就是不斷、不斷、不斷的Refresh頁面，它可以在檔案存檔的當下就自動幫你更新頁面，讓你可以即時看見更改後的結果。</p>
+
+<p>它有很多的版本，這邊用到的是<code>NodeJS</code>的版本。</p>
+
+<p><a href="https://github.com/napcs/node-livereload/" target="_blank">node-livereload</a></p>
+
+<h2>產生並修改專案</h2>
+
+<p><code>Express</code>本身預設的樣板引擎是<code>Jade</code>，另外內建就能支援<code>LESS</code>的middleware，在指令中加入參數<code>-c less</code>就可以了。</p>
+
+<pre><code class="bash">express -c less /path/to/project
+cd /path/to/project
+
+vim .package.json
+</code></pre>
+
+<h3>package.json</h3>
+
+<p>接著修改<code>package.json</code>，加入<code>connect-coffee-script</code>、<code>livereload</code>套件設定。</p>
+
+<pre><code class="json">{
+    "name": "application-name",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "3.4.7",
+        "jade": "*",
+        "less-middleware": "*"
+        "connect-coffee-script": "*",
+        "livereload": "*"
+    }
+}
+</code></pre>
+
+<p>最後就可以用<code>npm</code>安裝套件了。</p>
+
+<pre><code class="bash">npm install
+</code></pre>
+
+<h3>app.js</h3>
+
+<p>接下來開始修改<code>app.js</code>。</p>
+
+<p>首先修改<code>LESS Middleware</code>的設定，將輸出<code>CSS</code>檔案的資料夾設定到<code>/tmp</code>，並且將壓縮設定開啟。</p>
+
+<p>接著加入<code>CoffeeScript Middleware</code>的設定，同樣也是指定輸出資料夾為<code>/tmp</code>。最後將剛剛的輸出路徑<code>/tmp</code>加入到靜態檔案的路徑中。</p>
+
+<p>將<code>Middleware</code>輸出檔案的路徑指定到<code>/tmp</code>有個好處，這樣設定<code>Git Ignore</code>就可以直接忽略掉這個資料夾，而且輸出的檔案也不會跟原始檔案混雜。</p>
+
+<pre><code class="javascript">...
+
+app.use(require('less-middleware') ({ 
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'tmp'),
+    compress: true
+}));
+app.use(require('connect-coffee-script') ({ 
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'tmp')
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'tmp')));
+
+...
+</code></pre>
+
+<p>加入新的<code>Route rules</code>讓<code>LESS</code>及<code>CoffeeScript</code>的原始檔無法被讀取。</p>
+
+<pre><code class="javascript">...
+
+app.all('*.(coffee|less)', function (req, res) {
+    res.send(404);
+});
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+...
+</code></pre>
+
+<p>加入<code>LiveReload</code>的設定，讓它能夠認得<code>Jade</code>、<code>LESS</code>以及<code>CoffeeScript</code>的支援。
+<code>Jade</code>是放在<code>/views</code>裡，而<code>LESS</code>、<code>CoffeeScript</code>則是放在<code>/public</code>裡，所以讓s<code>LiveReload</code>個別去監聽資料夾內檔案的變化。</p>
+
+<pre><code class="javascript">...
+
+var livereload = require('livereload').createServer({
+    exts: ['jade', 'less', 'coffee']
+});
+
+livereload.watch(__dirname + '/public');
+livereload.watch(__dirname + '/views');
+
+...
+</code></pre>
+
+<p>最後別忘了幫瀏覽器安裝<code>LiveReload</code>的<code>extension</code>。</p>
+
+<p><a href="http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-)" target="_blank">LiveReload Extensions</a></p>
+
+<h2>結語</h2>
+
+<p>最後只要將<code>express</code>啟動，並將瀏覽器的<code>LiveReload Extension</code>連線打它就可以開始開發了。</p>
+
+<p>下面是<code>app.js</code>完整的檔案。</p>
+
+<pre><code class="javascript">var express = require('express');
+var routes = require('./routes');
+var user = require('./routes/user');
+var http = require('http');
+var path = require('path');
+
+var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(app.router);
+
+app.use(require('less-middleware') ({ 
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'tmp'),
+    compress: true
+}));
+app.use(require('connect-coffee-script') ({ 
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'tmp')
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'tmp')));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
+app.all('*.(coffee|less)', function (req, res) {
+    res.send(404);
+});
+app.get('/', routes.index);
+app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+// LiveReload
+var livereload = require('livereload').createServer({
+    exts: ['jade', 'less', 'coffee']
+});
+
+livereload.watch(__dirname + '/public');
+livereload.watch(__dirname + '/views');
+</code></pre>
+</div>
+	</article>
+		<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		var disqus_shortname = 'scarshow';
+		(function() {
+			var embed = document.createElement('script');
+			embed.type = 'text/javascript';
+			embed.async = true;
+			embed.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(embed);
+
+			var count = document.createElement('script');
+			count.async = true;
+			count.type = 'text/javascript';
+			count.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(count);
+		}());
+	</script>
+		<div class="bar">
+		<span class="new">
+			<a href="/article/2014/01/14/zsh-history-search-backward-and-forward"><< ZSH - history-search-backward/forward</a>		</span>
+		<span class="old">
+			<a href="/article/2013/11/24/fix-ubuntu-trakpoint-problem">修正Ubuntu 13.10小紅點問題 >></a>		</span>
+		<span class="count">
+			6 / 36		</span>
+	</div>
+</div>
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script');
+		po.type = 'text/javascript';
+		po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+</script>
+<div id="fb-root"></div>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script></div>
+		<div id="side">
+			<form class="search" action="http://www.google.com/search?q=as" target="_blank" method="get">
+				<input type="hidden" name="q" value="site:scar.simcz.tw" />
+				<input type="text" name="q" placeholder="Search" />
+				<input type="submit" />
+			</form>
+			<div class="about">
+	<div class="title">
+		<a href="/about">About</a>	</div>
+	<div class="content">
+		<img class="avatar" src="http://avatars.plurk.com/3891981-big26.jpg" alt="ScarWu" />
+		<p class="name">刀疤</p>
+		<p class="says">別人都覺得我多才多藝，但其實我只是略懂略懂。</p>
+		<div class="social_icon">
+			<a href="/atom.xml" target="_blank">
+				<img src="/theme/icons/rss.png" alt="RSS" />
+			</a>
+			<a href="https://github.com/ScarWu" target="_blank">
+				<img src="/theme/icons/github.png" alt="Github" />
+			</a>
+			<a href="https://plus.google.com/108940352426915109637" target="_blank">
+				<img src="/theme/icons/google_plus.png" alt="Google+" />
+			</a>
+			<a href="http://www.plurk.com/ScarWu" target="_blank">
+				<img src="/theme/icons/plurk.png" alt="Plurk" />
+			</a>
+		</div>
+	</div>
+</div><div class="archive">
+	<div class="title">
+		<a href="/archive">Archive</a>	</div>
+	<div class="content">
+				<span class="item">
+						<a href="/archive/2014">2014(6)</a>		</span>
+				<span class="item">
+						<a href="/archive/2013">2013(14)</a>		</span>
+				<span class="item">
+						<a href="/archive/2012">2012(14)</a>		</span>
+				<span class="item">
+						<a href="/archive/2011">2011(2)</a>		</span>
+			</div>
+</div><div class="category">
+	<div class="title">
+		<a href="/category">Category</a>	</div>
+	<div class="content">
+				<span class="item">
+						<a href="/category/Game">Game(1)</a>		</span>
+				<span class="item">
+						<a href="/category/IT">IT(34)</a>		</span>
+				<span class="item">
+						<a href="/category/Life">Life(1)</a>		</span>
+			</div>
+</div><div class="tag">
+	<div class="title">
+		<a href="/tag">Tag</a>	</div>
+	<div class="content">
+				<span class="item">
+						<a href="/tag/3C">3C(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Android">Android(3)</a>		</span>
+				<span class="item">
+						<a href="/tag/Apache">Apache(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Arch%20Linux">Arch Linux(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/C/C%2B%2B">C/C++(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Chrome">Chrome(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/Diablo%20III">Diablo III(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Express">Express(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Facebook">Facebook(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/Hadoop">Hadoop(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/HTML5">HTML5(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/iOS">iOS(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/JavaScript">JavaScript(7)</a>		</span>
+				<span class="item">
+						<a href="/tag/Linux">Linux(9)</a>		</span>
+				<span class="item">
+						<a href="/tag/Mobile%20Web">Mobile Web(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/NanoCLI">NanoCLI(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/NodeJS">NodeJS(3)</a>		</span>
+				<span class="item">
+						<a href="/tag/Note">Note(17)</a>		</span>
+				<span class="item">
+						<a href="/tag/PHP">PHP(16)</a>		</span>
+				<span class="item">
+						<a href="/tag/PHPBrew">PHPBrew(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Pointless">Pointless(3)</a>		</span>
+				<span class="item">
+						<a href="/tag/Python">Python(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/Raspberry%20Pi">Raspberry Pi(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/SQLite">SQLite(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/ThinkPad">ThinkPad(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Tools">Tools(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/Toy">Toy(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Ubuntu">Ubuntu(7)</a>		</span>
+				<span class="item">
+						<a href="/tag/Virus">Virus(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/WebGL">WebGL(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Windows">Windows(1)</a>		</span>
+				<span class="item">
+						<a href="/tag/Works">Works(2)</a>		</span>
+				<span class="item">
+						<a href="/tag/ZSH">ZSH(1)</a>		</span>
+			</div>
+</div>		</div>
+	</div>
+	<footer>
+		<span>Copyright &copy; Scar Wu</span>
+		<p>Powered by Pointless</p>
+	</footer>
+
+	<script src="/theme/main.js"></script>
+		<script>
+		var _gaq = [['_setAccount', 'UA-30675094-1'], ['_trackPageview']]; (function(d, t) {
+			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+			g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g, s)
+		} (document, 'script'));
+	</script>
+	</body>
+</html>

@@ -8,21 +8,21 @@
  * @link        http://github.com/scarwu/Pack
  */
 
-$root = realpath(dirname(__FILE__));
+$root = realpath(dirname(__FILE__) . '/..');
 
 if (!file_exists("$root/tmp")) {
     mkdir("$root/tmp", 0755);
 }
 
-require "$root/../vendor/autoload.php";
+require "$root/vendor/autoload.php";
 
 // Initialize JavaScript Packer
 $js = new Pack\JS();
 
 // Append JavaScript List
 $js->append([
-    "$root/js/example.js",
-    "$root/js/custom.js"
+    "$root/example/js/jquery-2.1.0.js",
+    "$root/example/js/modernizr-2.7.1.js"
 ]);
 
 // Pack JavaScript Files

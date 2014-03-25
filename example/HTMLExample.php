@@ -8,18 +8,18 @@
  * @link        http://github.com/scarwu/Pack
  */
 
-$root = realpath(dirname(__FILE__));
+$root = realpath(dirname(__FILE__) . '/..');
 
 if (!file_exists("$root/tmp")) {
     mkdir("$root/tmp", 0755);
 }
 
-require "$root/../vendor/autoload.php";
+require "$root/vendor/autoload.php";
 
 // Initialize HTML Packer
 $html = new Pack\HTML();
 
-$html->set("$root/html/zsh.html");
+$html->set("$root/example/html/express-jade-less-coffee-with-livereload.html");
 
 // Pack HTML Files to output_html.html
 $html->save("$root/tmp/output.html");
