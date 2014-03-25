@@ -1,11 +1,14 @@
 <?php
+
+use ScarWu\Pack\CSS;
+
 class CSSPackTest extends PHPUnit_Framework_TestCase
 {
     private $packer;
 
     public function setUp()
     {
-        $this->packer = new Pack\CSS();
+        $this->packer = new CSS();
     }
 
     /**

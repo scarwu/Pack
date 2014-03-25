@@ -1,11 +1,14 @@
 <?php
+
+use ScarWu\Pack\JS;
+
 class JSPackTest extends PHPUnit_Framework_TestCase
 {
     private $packer;
 
     public function setUp()
     {
-        $this->packer = new Pack\JS();
+        $this->packer = new JS();
     }
 
     /**

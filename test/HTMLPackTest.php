@@ -1,11 +1,14 @@
 <?php
+
+use ScarWu\Pack\HTML;
+
 class HTMLPackTest extends PHPUnit_Framework_TestCase
 {
     private $packer;
 
     public function setUp()
     {
-        $this->packer = new Pack\HTML();
+        $this->packer = new HTML();
     }
 
     /**
