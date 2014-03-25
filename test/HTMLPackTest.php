@@ -61,8 +61,8 @@ class HTMLPackTest extends PHPUnit_Framework_TestCase
                 ' < div >  < div > hello < /div >  < /div > ',
                 '<div><div>hello</div></div>'
             ], [
-                " < script type = \"text/javascript\" > ( function () {  var po = document.createElement( 'script' ) ; po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName ( 'script' ) [ 0 ] ; s.parentNode.insertBefore ( po , s ) ; } ) ( ) ; < /script > ",
-                "<script type=\"text/javascript\">(function () {var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/plusone.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(po,s);})();</script>"
+                " < script type = \"text/javascript\" > ( function ( ) {  var po = document.createElement( 'script' ) ; po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName ( 'script' ) [ 0 ] ; s.parentNode.insertBefore ( po , s ) ; } ) ( ) ; < /script > ",
+                "<script type=\"text/javascript\">(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/plusone.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(po,s);})();</script>"
             ], [
                 " < style type = \"text/css\" > div { background-color : #FF0000 ; } < /style > ",
                 "<style type=\"text/css\">div{background-color:#FF0000;}</style>"
