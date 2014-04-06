@@ -95,6 +95,8 @@ class JS
         $in_single_quote = false;
         $in_double_quote = false;
 
+        $in_regex = false;
+
         $skip_char = [
             '(', ')', '{', '}', ',',
             '+', '-', '*', '/', '%',

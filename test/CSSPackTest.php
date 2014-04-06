@@ -106,10 +106,10 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
                 "content:' email ';"
             ], [
                 ' color : #000000 !important ; ',
-                'color:#000000!important;'
+                'color:#000000 !important;'
             ], [
                 ' border : 1px #333 solid ; ',
-                'border:1px#333 solid;'
+                'border:1px #333 solid;'
             ], [
                 ' margin : 2px 2px 2px 2px ; ',
                 'margin:2px 2px 2px 2px;'
@@ -183,7 +183,7 @@ class CSSPackTest extends PHPUnit_Framework_TestCase
                 '@media screen and(max-width:1200px){div{font-size:2em;}}'
             ], [
                 " \nbody #main .content , span\n{\n\tdisplay : inline-block;\n\t/* width : 200px ; */ }\n@media screen and ( max-width : 1200px)\n{\n\tdiv\n\t{\n\t\tfont-size : 2em ;\n\t}\n}\n ",
-                'body#main.content,span{display:inline-block;}@media screen and(max-width:1200px){div{font-size:2em;}}'
+                'body #main .content,span{display:inline-block;}@media screen and(max-width:1200px){div{font-size:2em;}}'
             ], [
                 " \n@keyframes myfirst\n{\n\t0%\n\t{background: red; left:0px; top:0px;\n\t}\n\t50%\n\t{\n\t\tbackground : blue ; left : 200px ; top : 200px ;\n\t}\n\t100%\n\t{\n\t\tbackground : red ;\n\t\tleft : 0px ;\n\t\ttop : 0px ;\n\t}\n}\n ",
                 '@keyframes myfirst{0%{background:red;left:0px;top:0px;}50%{background:blue;left:200px;top:200px;}100%{background:red;left:0px;top:0px;}}'

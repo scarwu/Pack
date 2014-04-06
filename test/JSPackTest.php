@@ -125,6 +125,9 @@ class JSPackTest extends PHPUnit_Framework_TestCase
             ], [
                 ' console.log ( " \"\'\" " ) ; ',
                 'console.log(" \"\'\" ");'
+            ], [
+                ' str.replace( /http:\/\/(.*)/ , "http://scar.simcz.tw" ) ; ',
+                'str.replace(/http:\/\/(.*)/,"http://scar.simcz.tw");'
             ]
         ];
     }
