@@ -36,9 +36,9 @@ class HTML
      * @param string
      * @param string
      */
-    public function get($html = '')
+    public function get($html = null)
     {
-        if ('' === $html) {
+        if (null === $html) {
             if (file_exists($this->_path)) {
                 $html = file_get_contents($this->_path);
             }

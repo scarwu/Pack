@@ -48,11 +48,13 @@ class JS
     /**
      * Get Packed JavaScript
      *
+     * @param string
+     * @param boolean
      * @return string
      */
-    public function get($js = '')
+    public function get($js = null, $compress = true)
     {
-        if ('' === $js) {
+        if (null === $js) {
             foreach ((array) $this->_list as $src) {
                 if (!file_exists($src)) {
                     continue;
@@ -64,15 +66,16 @@ class JS
 
         $this->_list = [];
 
-        return $this->parse($js);
+        return $compress ? $this->parse($js) : $js;
     }
 
     /**
      * Save JavaScript to File
      *
      * @param string
+     * @param boolean
      */
-    public function save($dest = null)
+    public function save($dest = null, $compress = true)
     {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);

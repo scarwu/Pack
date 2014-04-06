@@ -48,11 +48,13 @@ class CSS
     /**
      * Get Packed CSS
      *
+     * @param string
+     * @param boolean
      * @return string
      */
-    public function get($css = '')
+    public function get($css = null, $compress = true)
     {
-        if ('' === $css) {
+        if (null === $css) {
             foreach ((array) $this->_list as $src) {
                 if (!file_exists($src)) {
                     continue;
@@ -64,21 +66,22 @@ class CSS
 
         $this->_list = [];
 
-        return $this->parse($css);
+        return $compress ? $this->parse($css) : $css;
     }
 
     /**
      * Save CSS to File
      *
      * @param string
+     * @param boolean
      */
-    public function save($dest = null)
+    public function save($dest = null, $compress = true)
     {
         if (!file_exists(dirname($dest))) {
             mkdir(dirname($dest), 0755, true);
         }
 
-        file_put_contents($dest, $this->get());
+        file_put_contents($dest, $this->get(null, $compress));
     }
 
     /**
