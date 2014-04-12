@@ -33,6 +33,8 @@ class HTML
     }
 
     /**
+     * Get Packed HTML
+     *
      * @param string
      * @param string
      */

@@ -81,7 +81,7 @@ class JS
             mkdir(dirname($dest), 0755, true);
         }
 
-        file_put_contents($dest, $this->get());
+        file_put_contents($dest, $this->get(null, $compress));
     }
 
     /**
