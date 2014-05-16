@@ -197,6 +197,10 @@ class CSS
                 $output = substr($output, 0, strlen($output) - 1);
             }
 
+            if ('(' === $char && 'and' === substr($output, -3)) {
+                $char = ' (';
+            }
+
             $output .= $char;
         }
 
